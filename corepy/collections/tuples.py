@@ -34,4 +34,3 @@ a = "jelly"
 b = "fish"
 a, b = b, a
 print(a, b)  # fish jelly
-
