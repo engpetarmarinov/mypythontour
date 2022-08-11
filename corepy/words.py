@@ -12,8 +12,8 @@ from urllib.request import urlopen
 def fetch_words(url):
     """ Fetches words from URL
 
-    :param url: the URL that we want to fetch
-    :return: List of words
+    param url: the URL that we want to fetch
+    return: List of words
     """
     story = urlopen(url)
     story_words = []
