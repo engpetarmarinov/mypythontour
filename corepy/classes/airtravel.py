@@ -166,3 +166,9 @@ def make_flights():
     g.allocate_seat('4A', 'Dennis Ritchie')
     
     return f, g
+
+
+if __name__ == '__main__':
+    f, g = make_flights()
+    f.make_boarding_cards(card_printer)
+    g.make_boarding_cards(card_printer)
