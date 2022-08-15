@@ -10,6 +10,7 @@ co = [generate_item(item) for item in words]
 print(co)  # [3, 9, 1, 4, 8, 2, 4, 2, 3, 5, 6, 9]
 
 """
+Dictionary comprehension
 {
     key_expr(item): value_expr(item)
     for item in iterable
