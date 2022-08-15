@@ -1,5 +1,5 @@
 import math
-from itertools import islice, count
+from itertools import islice, count, chain
 
 
 def is_prime(n):
@@ -39,3 +39,7 @@ min=14.0, max=16.0, average=15.0
 min=12.0, max=13.0, average=12.3
 min=11.0, max=12.0, average=11.7
 """
+
+# chain
+temps = chain(monday, tuesday, wednesday)
+print(all(t > 0 for t in temps))  # True
