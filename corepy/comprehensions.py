@@ -27,3 +27,5 @@ capital_to_country = {
 }
 print(capital_to_country)  # {'Sofia': 'Bulgaria', 'London': 'United Kingdom', 'Rabat': 'Morocco'}
 
+# filtering comprehensions
+print([x for x in range(10) if x % 2 == 0])  # [0, 2, 4, 6, 8]
