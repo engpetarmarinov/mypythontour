@@ -47,6 +47,7 @@ key: goldenrod, value: 894240
 # delete
 del r["indigo"]
 print(r)  # {'wheat': 16113331, 'goldenrod': 894240}
-pp({"A": [1, 2, 3],
-    "B": [4, 5, 6],
-    "C": [7, 8, 9]})
+pp({"A": [11111.00, 2, 3],
+    "B": [4, 5, [4, 5, 6]],
+    "C": [7, 8, 9]},
+   indent=4, width=100, compact=False, underscore_numbers=True)
