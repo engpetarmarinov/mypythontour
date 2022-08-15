@@ -1,3 +1,5 @@
+import sys
+
 DIGITAL_MAP = {
     'zero': 0,
     'one': 1,
@@ -17,12 +19,12 @@ def convert(s):
         number = ''
         for token in s:
             number += str(DIGITAL_MAP[token])
-        x = int(number)
-    except (KeyError, TypeError):
-        x = -1
-    return x
+        return int(number)
+    except (KeyError, TypeError) as e:
+        print(f"Conversion error: {e!r}", file=sys.stderr)
+        return -1
 
 
 print(convert("three two".split()))  # 32
-print(convert("around two trillions".split()))  # -1 -> KeyError
-print(convert(23))  # -1 -> TypeError
+print(convert("around two trillions".split()))  # -1 -> Conversion error: KeyError('around')
+print(convert(23))  # -1 -> Conversion error: TypeError("'int' object is not iterable")
