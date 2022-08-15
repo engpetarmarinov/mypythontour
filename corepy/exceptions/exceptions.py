@@ -28,3 +28,4 @@ def convert(s):
 print(convert("three two".split()))  # 32
 print(convert("around two trillions".split()))  # -1 -> Conversion error: KeyError('around')
 print(convert(23))  # -1 -> Conversion error: TypeError("'int' object is not iterable")
+# Generally don't catch TypeError
