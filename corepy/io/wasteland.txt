@@ -2,3 +2,4 @@ What's going on?
 Am I writing into a file?
 This line was appended!
 This line was appended too!
+Add some more lines from within a with-block.

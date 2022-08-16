@@ -25,3 +25,10 @@ try:
     ])
 finally:
     f.close()
+
+
+# with-block will implicitly close the file.
+with open("wasteland.txt", mode="at", encoding="utf-8") as f:
+    f.writelines([
+        "Add some more lines from within a with-block.\n",
+    ])
