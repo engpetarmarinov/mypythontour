@@ -14,7 +14,7 @@ print(dummymodule.__file__)
 print(dummypackage.subpackage.__file__)
 # /Users/mpetar/devwork/github.com/engpetarmarinov/mypythontour/organizing_larger_programs/importing_modules/dummypackage/subpackage/__init__.py
 print(type(dummypackage))  # <class 'module'>
-print(type(dummypackage.dummymodule))   # <class 'module'>
+print(type(dummypackage.dummymodule))  # <class 'module'>
 
 print(dummymodule.__name__)  # dummypackage.dummymodule
 print(dummypackage.dummymodule.__name__)  # dummypackage.dummymodule
