@@ -29,10 +29,6 @@ while True:
 
             if match[0]:
                 name = "Petar"
-            elif match[1]:
-                name = "Birthday boy!"
-            elif match[2]:
-                name = "Birthday boy!"
 
             face_names.append(name)
 
