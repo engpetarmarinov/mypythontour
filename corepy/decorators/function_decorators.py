@@ -1,8 +1,8 @@
-def escape_unicode(f):
+def escape_unicode(f):  # decorators accept callable
     def wrap(*args, **kwargs):
         x = f(*args, **kwargs)
         return ascii(x)
-    return wrap
+    return wrap  # decorators return callable
 
 
 @escape_unicode
