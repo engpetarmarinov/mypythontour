@@ -1,3 +1,6 @@
+import itertools
+
+
 class Trace:
     def __init__(self):
         self.enabled = True
@@ -23,6 +26,16 @@ def main():
 
     for o in result:
         print(o)
+
+    sizes = ['small', 'medium', 'large']
+    colors = ['lavender', 'teal', 'burnt orange']
+    animals = ['koala', 'platypus', 'salamander']
+
+    def combine(quantity, size, color, animal):
+        return f"{quantity} x {size} {color} {animal}"
+
+    print(list(map(combine, itertools.count(), sizes, colors, animals)))
+    # ['0 x small lavender koala', '1 x medium teal platypus', '2 x large burnt orange salamander']
 
 
 if __name__ == '__main__':
