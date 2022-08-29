@@ -21,6 +21,9 @@ def main():
     print(next(result))  # Calling <built-in function ord>
     # 104
 
+    for o in result:
+        print(o)
+
 
 if __name__ == '__main__':
     main()
