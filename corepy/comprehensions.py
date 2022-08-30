@@ -22,6 +22,7 @@ country_to_capital = {
     "Morocco": "Rabat",
 }
 
+# dict comprehension
 capital_to_country = {
     capital: country
     for country, capital in country_to_capital.items()
@@ -30,3 +31,21 @@ print(capital_to_country)  # {'Sofia': 'Bulgaria', 'London': 'United Kingdom', '
 
 # filtering comprehensions
 print([x for x in range(10) if x % 2 == 0])  # [0, 2, 4, 6, 8]
+
+# generator comprehension
+g = (i * 2 for i in range(1, 11))
+print(type(g))  # <class 'generator'>
+for v in g:
+    print(v)
+"""
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+"""
