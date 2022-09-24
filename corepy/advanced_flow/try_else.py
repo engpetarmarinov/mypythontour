@@ -1,7 +1,7 @@
 if __name__ == "__main__":
     try:
         filename = "test.txt"
-        f = open(filename,"rt")
+        f = open(filename, "rt")
     except OSError:
         print(f"File {filename} could not be open for read.")
     else:
