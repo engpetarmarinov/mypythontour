@@ -1,6 +1,6 @@
 import datetime
-from multiprocessing import Pool
-from time import sleep
+from multiprocessing import Pool, cpu_count
+from time import time
 
 
 def abstractfunc(func):
@@ -52,7 +52,7 @@ class Rectangle(ShapeInterface):
         self._b = b
 
     def area(self):
-        sleep(2)
+        do_work(2)
         return self._a * self._b
 
 
@@ -69,7 +69,7 @@ class Triangle(ShapeInterface):
         self._height = height
 
     def area(self):
-        sleep(1)
+        do_work(3)
         return 0.5 * self._base * self._height
 
 
@@ -83,7 +83,7 @@ def sum_shapes_areas(*shapes) -> float:
 
 def sum_shapes_areas_multiprocessing(*shapes) -> float:
     sum_of_areas = 0
-    with Pool(processes=len(shapes)) as pool:
+    with Pool(processes=min(len(shapes), cpu_count())) as pool:
         jobs = [
             pool.apply_async(func=shape.area)
             for shape in shapes
@@ -94,6 +94,13 @@ def sum_shapes_areas_multiprocessing(*shapes) -> float:
     return sum_of_areas
 
 
+def do_work(seconds):
+    t_end = time() + seconds
+    while time() < t_end:
+        a = time() * time()
+    return a
+
+
 if __name__ == "__main__":
     rec = Rectangle(2, 4)
     tri = Triangle(2, 3)
@@ -101,12 +108,12 @@ if __name__ == "__main__":
 
     start = datetime.datetime.now()
     print("Running sum_shapes_areas...")
-    print(sum_shapes_areas(*shapes_args))
+    print(f"Sum of all areas is {sum_shapes_areas(*shapes_args)}")
     duration_of_sum_shapes_areas = datetime.datetime.now() - start
     print(f"sum_shapes_areas took {duration_of_sum_shapes_areas.total_seconds() * 1000} ms")
 
     start = datetime.datetime.now()
     print("Running sum_shapes_areas_multiprocessing...")
-    print(sum_shapes_areas_multiprocessing(*shapes_args))
+    print(f"Sum of all areas is {sum_shapes_areas_multiprocessing(*shapes_args)}")
     duration_of_sum_shapes_areas = datetime.datetime.now() - start
     print(f"sum_shapes_areas_multiprocessing took {duration_of_sum_shapes_areas.total_seconds() * 1000} ms")
