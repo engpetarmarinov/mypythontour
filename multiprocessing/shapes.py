@@ -1,6 +1,5 @@
 import datetime
 from multiprocessing import Pool
-from multiprocessing.managers import SyncManager
 from time import sleep
 
 
@@ -11,16 +10,14 @@ def abstractfunc(func):
 
 class Interface(type):
 
-    def __init__(self, name, bases, namespace):
+    def __init__(self, name, bases, _namespace):
         for base in bases:
             must_implement = getattr(base, 'abstract_methods', [])
             class_methods = getattr(self, 'all_methods', [])
             for method in must_implement:
                 if method not in class_methods:
-                    err_str = """Can't create abstract class {name}!
-                    {name} must implement abstract method {method} of class {base_class}!""".format(name=name,
-                                                                                                    method=method,
-                                                                                                    base_class=base.__name__)
+                    err_str = f"""Can't create abstract class {name}!
+                    {name} must implement abstract method {method} of class {base.__name__}!"""
                     raise TypeError(err_str)
 
     def __new__(metaclass, name, bases, namespace):
@@ -77,40 +74,39 @@ class Triangle(ShapeInterface):
 
 
 def sum_shapes_areas(*shapes) -> float:
-    sum = 0
+    sum_of_areas = 0
     for shape in shapes:
-        sum += shape.area()
+        sum_of_areas += shape.area()
 
-    return sum
+    return sum_of_areas
 
 
 def sum_shapes_areas_multiprocessing(*shapes) -> float:
-    sum = 0
+    sum_of_areas = 0
     with Pool(processes=len(shapes)) as pool:
         jobs = [
             pool.apply_async(func=shape.area)
             for shape in shapes
         ]
         for job in jobs:
-            sum += job.get()
+            sum_of_areas += job.get()
 
-    return sum
+    return sum_of_areas
 
 
 if __name__ == "__main__":
     rec = Rectangle(2, 4)
     tri = Triangle(2, 3)
-    shapes = [rec, tri, tri, rec, tri, tri]
+    shapes_args = [rec, tri, tri, rec, tri, tri]
 
     start = datetime.datetime.now()
     print("Running sum_shapes_areas...")
-    print(sum_shapes_areas(*shapes))
+    print(sum_shapes_areas(*shapes_args))
     duration_of_sum_shapes_areas = datetime.datetime.now() - start
     print(f"sum_shapes_areas took {duration_of_sum_shapes_areas.total_seconds() * 1000} ms")
 
     start = datetime.datetime.now()
     print("Running sum_shapes_areas_multiprocessing...")
-    print(sum_shapes_areas_multiprocessing(*shapes))
+    print(sum_shapes_areas_multiprocessing(*shapes_args))
     duration_of_sum_shapes_areas = datetime.datetime.now() - start
     print(f"sum_shapes_areas_multiprocessing took {duration_of_sum_shapes_areas.total_seconds() * 1000} ms")
-
