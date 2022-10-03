@@ -2,7 +2,7 @@ import asyncio
 import time
 
 
-async def counter_asyc(name: str):
+async def counter_async(name: str):
     for i in range(0, 10):
         print(f"{name}: {i!s}")
         await asyncio.sleep(1)
@@ -11,7 +11,7 @@ async def counter_asyc(name: str):
 async def main():
     tasks = []
     for n in range(0, 4):
-        tasks.append(asyncio.create_task(counter_asyc(f"task{n}")))
+        tasks.append(asyncio.create_task(counter_async(f"task{n}")))
 
     for task in tasks:
         await task
