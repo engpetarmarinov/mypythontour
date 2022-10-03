@@ -1,20 +1,19 @@
-import asyncio
+import time
 
 
-async def counter(name: str):
+def counter(name: str):
     for i in range(0, 10):
         print(f"{name}: {i!s}")
-        await asyncio.sleep(1)
+        time.sleep(1)
 
 
-async def main():
-    tasks = []
+def main():
     for n in range(0, 4):
-        tasks.append(asyncio.create_task(counter(f"task{n}")))
-
-    for task in tasks:
-        await task
+        counter(f"task{n}")
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    start = time.time()
+    main()
+    end = time.time()
+    print(f"main done in {end-start}s")  # main done in 40.14921569824219s
