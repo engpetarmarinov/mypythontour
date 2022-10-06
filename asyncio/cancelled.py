@@ -17,6 +17,7 @@ async def bar():
 async def main():
     try:
         """
+        return_exceptions
         When this parameter is set to True, the function returns a list of both values and exceptions; 
         allowing all tasks to complete before returning. 
         As all tasks have been completed they are removed from the event loop.
