@@ -36,3 +36,7 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+    """
+    Value Error raised: Foo value error.
+    Bar Cancelled.
+    """
