@@ -4,12 +4,16 @@ import time
 
 
 async def get_url_async(url):
-    start = time.time()
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            end = time.time()
-            print(f"get_url_async {url} done in {end - start}s")
-            return resp
+    start_time = time.time()
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as resp:
+                return resp
+    except asyncio.CancelledError:
+        print(f"{url} cancelled")
+    finally:
+        end_time = time.time()
+        print(f"get_url_async {url} done in {end_time - start_time}s")
 
 
 async def main():
@@ -18,11 +22,13 @@ async def main():
         "https://yahoo.com",
         "https://apple.com",
         "https://microsoft.com",
+        "https://slavi.bg",
     ]
     tasks = []
     for url in urls:
         tasks.append(asyncio.create_task(get_url_async(url)))
 
+    await asyncio.gather(*tasks, return_exceptions=False)
     for task in tasks:
         result = await task
         print(result.status)
@@ -30,7 +36,9 @@ async def main():
 
 if __name__ == "__main__":
     start = time.time()
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except Exception as e:
+        print(e)
     end = time.time()
-    print(f"main done in {end-start}s")  # main done in 1.547325849533081s
-
+    print(f"main done in {end - start}s")  # main done in 1.547325849533081s
