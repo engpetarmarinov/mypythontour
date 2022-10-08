@@ -110,10 +110,10 @@ if __name__ == "__main__":
     print("Running sum_shapes_areas...")
     print(f"Sum of all areas is {sum_shapes_areas(*shapes_args)}")
     duration_of_sum_shapes_areas = datetime.datetime.now() - start
-    print(f"sum_shapes_areas took {duration_of_sum_shapes_areas.total_seconds() * 1000} ms")
+    print(f"sum_shapes_areas took {duration_of_sum_shapes_areas.total_seconds() * 1000:.2f} ms")
 
     start = datetime.datetime.now()
     print("Running sum_shapes_areas_multiprocessing...")
     print(f"Sum of all areas is {sum_shapes_areas_multiprocessing(*shapes_args)}")
     duration_of_sum_shapes_areas = datetime.datetime.now() - start
-    print(f"sum_shapes_areas_multiprocessing took {duration_of_sum_shapes_areas.total_seconds() * 1000} ms")
+    print(f"sum_shapes_areas_multiprocessing took {duration_of_sum_shapes_areas.total_seconds() * 1000:.2f} ms")
