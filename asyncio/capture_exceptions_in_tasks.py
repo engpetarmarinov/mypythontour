@@ -1,4 +1,5 @@
 import asyncio
+import time
 
 
 async def foo():
@@ -32,7 +33,11 @@ async def main():
 
 
 if __name__ == "__main__":
+    start = time.time()
     try:
         asyncio.run(main())
     except Exception as e:
         print(f"Exception caught: {e}")
+    else:
+        end = time.time()
+        print(f"execution took {end-start}s")
