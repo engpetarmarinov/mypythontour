@@ -1,6 +1,7 @@
 import datetime
 from multiprocessing import Pool, cpu_count
 from time import time
+from tqdm import tqdm
 
 
 def abstractfunc(func):
@@ -88,7 +89,7 @@ def sum_shapes_areas_multiprocessing(*shapes) -> float:
             pool.apply_async(func=shape.area)
             for shape in shapes
         ]
-        for job in jobs:
+        for job in tqdm(jobs, desc="Calculating areas of all shapes", miniters=1):
             sum_of_areas += job.get()
 
     return sum_of_areas
