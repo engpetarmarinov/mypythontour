@@ -3,10 +3,10 @@ import asyncio
 import time
 
 
-async def get_url_async(url):
+async def get_url_async(connector, url):
     start_time = time.time()
     try:
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(connector=connector, connector_owner=False) as session:
             async with session.get(url) as resp:
                 return resp
     except asyncio.CancelledError:
@@ -25,13 +25,21 @@ async def main():
         "https://slavi.bg",
     ]
     tasks = []
-    for url in urls:
-        tasks.append(asyncio.create_task(get_url_async(url)))
+    async with aiohttp.TCPConnector(
+            limit=0,
+            limit_per_host=0,
+            ssl=False,
+            use_dns_cache=True,
+            ttl_dns_cache=10800,
+    ) as connector:
+        for url in urls:
+            tasks.append(asyncio.create_task(get_url_async(connector, url)))
 
-    await asyncio.gather(*tasks, return_exceptions=False)
-    for task in tasks:
-        result = await task
-        print(result.status)
+        await asyncio.gather(*tasks, return_exceptions=False)
+
+        for task in tasks:
+            result = await task
+            print(result.status)
 
 
 if __name__ == "__main__":
