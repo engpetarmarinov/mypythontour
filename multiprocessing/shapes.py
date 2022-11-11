@@ -76,7 +76,7 @@ class Triangle(ShapeInterface):
 
 def sum_shapes_areas(*shapes) -> float:
     sum_of_areas = 0
-    for shape in shapes:
+    for shape in tqdm(shapes, desc="Calculating areas of all shapes", miniters=1):
         sum_of_areas += shape.area()
 
     return sum_of_areas
